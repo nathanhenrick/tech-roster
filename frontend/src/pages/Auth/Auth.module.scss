@@ -1,4 +1,5 @@
 .container {
+  color: $black-color;
   display: flex;
   min-height: 100vh;
   font-family: sans-serif;
@@ -6,9 +7,17 @@
 
 .aside {
   flex: 1;
-  background-image: url("/public/banner.webp");
+  background-image: url("/banner.webp");
   background-size: cover;
   background-position: center;
+}
+
+a {
+  color: $primary-color;
+}
+
+*:disabled {
+  cursor: not-allowed;
 }
 
 .section {
@@ -19,6 +28,12 @@
   align-items: center;
   padding: 2rem;
   background-color: $white-color;
+
+  .form {
+    small {
+      text-align: center;
+    }
+  }
 
   img {
     max-width: 320px;

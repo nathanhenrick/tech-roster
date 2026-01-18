@@ -4,14 +4,14 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   label?: React.ReactNode;
   onClick?: () => void;
-  type?: "button";
+  type?: "button" | "submit";
   disabled?: boolean;
 }
 
 export function Button({
   label,
   onClick,
-  type = "button",
+  type,
   disabled
 }: ButtonProps) {
 

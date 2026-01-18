@@ -7,9 +7,25 @@ use Illuminate\Http\Request;
 
 class NivelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Nivel::all();
+        $perPage = $request->query('per_page', 10);
+
+        $paginated = Nivel::orderBy('id')->paginate($perPage);
+
+        return response()->json([
+            'data' => $paginated->items(),
+            'meta' => [
+                'current_page' => $paginated->currentPage(),
+                'per_page' => $paginated->perPage(),
+                'total' => $paginated->total(),
+                'last_page' => $paginated->lastPage(),
+                'from' => $paginated->firstItem(),
+                'to' => $paginated->lastItem(),
+                'next_page_url' => $paginated->nextPageUrl(),
+                'prev_page_url' => $paginated->previousPageUrl(),
+            ]
+        ]);
     }
 
     public function show($id)

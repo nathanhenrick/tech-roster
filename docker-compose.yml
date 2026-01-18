@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: db_tech_roster
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: rz6nVN541@&O
+      POSTGRES_DB: techrosterdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  db_data:

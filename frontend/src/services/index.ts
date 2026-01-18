@@ -1,2 +1,3 @@
-// export * as UserService from './developerService';
-// export * as ProductService from './levelService';
+export * as DevelopersService from './developer';
+export * as LevelsService from './levels';
+export * as AuthService from './auth';

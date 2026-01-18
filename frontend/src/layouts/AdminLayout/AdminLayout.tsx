@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { Sidebar } from "../../components/Sidebar/Sidebar"
+import Sidebar from "../../components/Sidebar/Sidebar"
 import { Footer } from "../../components/Footer/Footer"
 import styles from './AdminLayout.module.scss'
 

@@ -14,14 +14,8 @@
     gap: 12px;
     padding: 0 20px;
 
-    .logoIcon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      img {
-        width: 10rem;
-      }
+    img {
+      max-width: 10rem;
     }
   }
 
@@ -44,6 +38,10 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     .navItem {

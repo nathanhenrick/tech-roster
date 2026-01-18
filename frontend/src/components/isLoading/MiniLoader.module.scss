@@ -1,8 +1,8 @@
 .loader {
-  height: 32px;
+  height: 14px;
   margin: 0 auto;
   aspect-ratio: 2.5;
-  --_g: no-repeat radial-gradient(farthest-side, #2563eb 90%, #0000);
+  --_g: no-repeat radial-gradient(farthest-side, white 90%, #0000);
   background: var(--_g), var(--_g), var(--_g), var(--_g);
   background-size: 20% 50%;
   animation: loading 1s infinite linear;

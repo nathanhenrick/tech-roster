@@ -1,51 +1,75 @@
-import { useState } from 'react'
-import {
-  BsPeople,
-  BsLayerForward,
-  BsBoxArrowRight
-} from "react-icons/bs"
+import { NavLink, useNavigate } from 'react-router-dom'
+import { BsPeople, BsLayers, BsBoxArrowRight } from 'react-icons/bs'
 import styles from './Sidebar.module.scss'
+import { useIsLoading } from "../../components/isLoading/isLoading"
+import { AuthService } from '../../services'
+import { ToastContainer, toast } from 'react-toastify'
 
-export function Sidebar() {
-  const [activeMenu, setActiveMenu] = useState('levels')
+function Sidebar() {
+  const { isLoadingStart, isLoadingStop } = useIsLoading()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      isLoadingStart()
+
+      await AuthService.logout()
+
+      localStorage.removeItem("token")
+      
+      toast.success('Saindo...')
+      setTimeout(() => {
+        navigate('/admin/login')
+      }, 2000);
+    } catch (error) {
+      console.error(error)
+    } finally {
+      isLoadingStop()
+    }
+  }
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <div className={styles.logoIcon}>
-          <img src="/src/assets/images/logoFullColor.svg" alt="TechRoster Logo" />
-        </div>
+        <img src="/logoFullColor.svg" alt="Logo da TechRoster" />
       </div>
 
       <hr className={styles.line} />
 
-      {/* Navigation tabs */}
       <nav className={styles.nav}>
         <div>
-          <button
-            className={`${styles.navItem} ${activeMenu === 'desenvolvedores' ? styles.navItemActive : ''}`}
-            onClick={() => setActiveMenu('desenvolvedores')}
+          <NavLink
+            to="/admin/desenvolvedores"
+            className={({ isActive }) =>
+              `${styles.navItem} ${isActive ? styles.navItemActive : ''}`
+            }
           >
             <BsPeople />
             <span>Desenvolvedores</span>
-          </button>
-          <button
-            className={`${styles.navItem} ${activeMenu === 'niveis' ? styles.navItemActive : ''}`}
-            onClick={() => setActiveMenu('niveis')}
+          </NavLink>
+
+          <NavLink
+            to="/admin/niveis"
+            className={({ isActive }) =>
+              `${styles.navItem} ${isActive ? styles.navItemActive : ''}`
+            }
           >
-            <BsLayerForward />
+            <BsLayers />
             <span>Níveis</span>
-          </button>
+          </NavLink>
         </div>
 
         <button
-          className={`${styles.navItem} ${activeMenu === 'niveis' ? styles.navItemActive : ''}`}
-          onClick={() => setActiveMenu('niveis')}
+          className={styles.navItem}
+          onClick={handleLogout}
         >
           <BsBoxArrowRight />
           <span>Sair</span>
         </button>
       </nav>
+      <ToastContainer />
     </aside>
   )
 }
+
+export default Sidebar

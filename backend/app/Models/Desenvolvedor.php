@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Desenvolvedor extends Model
 {
+    protected $table = 'desenvolvedores';
     use HasFactory;
 
     protected $fillable = [
+        'nivel_id',
         'nome',
         'sexo',
-        'data_nascimento',
         'hobby',
-        'nivel_id'
+        'data_nascimento'
     ];
 
     public function nivel()

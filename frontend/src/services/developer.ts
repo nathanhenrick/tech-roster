@@ -1,48 +1,39 @@
-import api from './axios';
+import api from "./axios";
 
-const getToken = () => {
-  // pegar do localStorage, Context ou Redux
-  return localStorage.getItem('token');
+interface DevelopersData {
+  nome: string;
+  nivel_id: number;
+  sexo: string;
+  data_nascimento: string;
+  hobby: string;
+}
+
+export const save = async (payload: DevelopersData) => {
+  const response = await api.post("/desenvolvedores", payload);
+  return response.data;
 };
 
-export const MarcaService = {
-  save: async (payload) => {
-    const token = getToken();
-    const response = await api.post('/marcas', payload, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return { data: response.data.data };
-  },
+export const update = async (id: number, payload: DevelopersData) => {
+  const response = await api.put(`/desenvolvedores/${id}`, payload);
+  return response.data;
+};
 
-  update: async ({ id, ...payload }) => {
-    const token = getToken();
-    const response = await api.put(`/marcas/${id}`, payload, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return { data: response.data.data };
-  },
+export const getAll = async (page?: number) => {
+  const response = await api.get(`/desenvolvedores?page=${page}`);
+  return { data: response.data.data, meta: response.data.meta };
+};
 
-  getAll: async () => {
-    const token = getToken();
-    const response = await api.get('/marcas', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return { data: response.data.data };
-  },
+export const getAllPaginations = async (per_page?: number) => {
+  const response = await api.get(`/desenvolvedores?per_page=${per_page}`);
+  return { data: response.data.data, meta: response.data.meta };
+};
 
-  getById: async (id) => {
-    const token = getToken();
-    const response = await api.get(`/marcas/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return { data: response.data.data };
-  },
+export const getById = async (id: number) => {
+  const response = await api.put(`/desenvolvedores/${id}`);
+  return response.data;
+};
 
-  delete: async (id) => {
-    const token = getToken();
-    const response = await api.delete(`/marcas/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return response;
-  },
+export const remove = async (id: number) => {
+  const response = await api.delete(`/desenvolvedores/${id}`);
+  return response.data;
 };
