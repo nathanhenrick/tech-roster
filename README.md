@@ -10,13 +10,13 @@ Sistema de gerenciamento de desenvolvedores e seus níveis de habilidade, com au
 * **Orquestração de containers:** Docker / Docker Compose
 
 ## Estrutura do Projeto
-
+```bash
 tech-roster/
 ├── backend/ # Laravel API
 ├── frontend/ # SPA em React/TypeScript
 ├── docker-compose.yml
 └── README.md
-
+```
 
 ## Pré-requisitos
 
