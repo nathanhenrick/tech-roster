@@ -62,22 +62,21 @@ Os demais campos podem permanecer como estão no .env.example.
 Rodar migrations e seeders dentro do container backend:
 ```bash
 docker-compose exec backend php artisan migrate
-docker-compose exec backend php artisan db:seed   # opcional, se houver seeders
 ```
 
 Instalar dependências do frontend (se necessário):
 ```bash
 docker-compose exec frontend npm install
 docker-compose exec frontend npm run dev
-Acesso
-Backend: http://localhost:8000
 ```
+## Acesso
+Backend: http://localhost:8000
 
 Frontend: http://localhost:3000 (ou porta configurada no Vite)
 
 Todos os serviços estão rodando dentro de containers Docker, não é necessário instalar PHP, Node ou PostgreSQL localmente.
 
-Funcionalidades
+## Funcionalidades
 Autenticação de usuários (login, registro e logout)
 
 CRUD de desenvolvedores
@@ -86,10 +85,10 @@ CRUD de níveis
 
 Validação de cadastro (não permite criar dev sem nível)
 
-Observações
+## Observações
 Sempre use docker-compose exec para rodar comandos dentro dos containers.
 
 Se recriar o container do PostgreSQL, as tabelas precisarão ser migradas novamente.
 
-Licença
+## Licença
 MIT License. Veja LICENSE para mais detalhes.
