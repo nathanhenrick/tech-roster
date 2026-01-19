@@ -16,7 +16,6 @@ tech-roster/
 ├── backend/    # Laravel API
 ├── frontend/   # SPA em React/TypeScript
 ├── docker-compose.yml
-├── .env.example
 └── README.md
 ```
 
