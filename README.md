@@ -59,6 +59,11 @@ Os demais campos podem permanecer como estão no `.env.example`.
 
 3. Suba os containers do Docker:
 
+1. Saia da pasta /backend
+```bash
+cd ..
+```
+2. Execute o comando
 ```bash
 docker-compose up -d --build
 ```
