@@ -43,13 +43,7 @@ cd tech-roster
 ```bash
 cd backend
 copy .env.example .env       # Copiar o .env antes de instalar
-composer install              # Instalar dependências
-php artisan serve             # Rodar backend
 ```
-
-Após clonar o repositório, copie o arquivo .env.example para .env dentro da pasta backend:
-
-cp backend/.env.example backend/.env
 
 Depois de criar o .env, ajuste os campos do banco de dados para que correspondam ao seu container Docker ou ambiente local. Por exemplo:
 
@@ -62,6 +56,12 @@ DB_PASSWORD=rz6nVN541@&O
 
 
 Os demais campos podem permanecer como estão no .env.example. Não é necessário criar um .env no frontend.
+
+```bash
+composer install              # Instalar dependências
+php artisan serve             # Rodar backend
+
+```
 
 ### Frontend
 
