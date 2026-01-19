@@ -88,7 +88,7 @@ export default function DevelopersPage() {
       isLoadingStop()
     }
   }, [isLoadingStart, isLoadingStop])
-
+  
   useEffect(() => {
     fetchData(currentPage)
   }, [currentPage, fetchData])

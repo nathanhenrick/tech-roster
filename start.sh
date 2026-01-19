@@ -1,0 +1,1 @@
+﻿#!/bin/bash# start backendcd backend || exitphp artisan serve --host=0.0.0.0 --port=8000 &# start frontendcd ../frontend || exitnpm installnpm run dev
