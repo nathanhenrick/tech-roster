@@ -11,13 +11,12 @@ Sistema de gerenciamento de desenvolvedores e seus níveis de habilidade, com au
 
 ## Estrutura do Projeto
 
-```
 tech-roster/
-├── backend/    # Laravel API
-├── frontend/   # SPA em React/TypeScript
+├── backend/ # Laravel API
+├── frontend/ # SPA em React/TypeScript
 ├── docker-compose.yml
 └── README.md
-```
+
 
 ## Pré-requisitos
 
@@ -34,64 +33,63 @@ tech-roster/
 git clone https://github.com/nathanhenrick/tech-roster.git
 cd tech-roster
 ```
-
-2. Siga os passos abaixo:
-
-### Backend
-
+Suba os containers do Docker:
 ```bash
-cd backend
-copy .env.example .env       # Copiar o .env antes de instalar
+docker-compose up -d --build
+Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 ```
 
-Depois de criar o .env, ajuste os campos do banco de dados para que correspondam ao seu container Docker ou ambiente local. Por exemplo:
+Criar o .env do backend:
+```bash
+cd backend
+copy .env.example .env  # Windows
+# ou
+cp .env.example .env    # Linux/Mac
+```
 
+Ajuste os campos do banco de dados para usar o container do PostgreSQL:
 ```bash
 DB_CONNECTION=pgsql
-
 DB_HOST=db
-
 DB_PORT=5432
-
 DB_DATABASE=techrosterdb
-
 DB_USERNAME=admin
-
 DB_PASSWORD=rz6nVN541@&O
 ```
 
-Os demais campos podem permanecer como estão no .env.example. Não é necessário criar um .env no frontend.
+Os demais campos podem permanecer como estão no .env.example.
 
+Rodar migrations e seeders dentro do container backend:
 ```bash
-composer install              # Instalar dependências
-php artisan serve             # Rodar backend
-
+docker-compose exec backend php artisan migrate
+docker-compose exec backend php artisan db:seed   # opcional, se houver seeders
 ```
 
-### Frontend
-
+Instalar dependências do frontend (se necessário):
 ```bash
-cd ../frontend
-npm install                   # Instalar dependências
-npm run dev                    # Rodar frontend
+docker-compose exec frontend npm install
+docker-compose exec frontend npm run dev
+Acesso
+Backend: http://localhost:8000
 ```
 
-3. Acesse:
+Frontend: http://localhost:3000 (ou porta configurada no Vite)
 
-* Backend: `http://localhost:8000`
-* Frontend: `http://localhost:3000` (ou porta indicada pelo Vite)
+Todos os serviços estão rodando dentro de containers Docker, não é necessário instalar PHP, Node ou PostgreSQL localmente.
 
-## Funcionalidades
+Funcionalidades
+Autenticação de usuários (login, registro e logout)
 
-* Autenticação de usuários (login, registro e logout)
-* CRUD de desenvolvedores
-* CRUD de níveis
-* Validação de cadastro (não permite criar dev sem nível)
+CRUD de desenvolvedores
 
-## Observações
+CRUD de níveis
 
-* Certifique-se de que as portas do Docker não estão sendo usadas por outros serviços.
+Validação de cadastro (não permite criar dev sem nível)
 
-## Licença
+Observações
+Sempre use docker-compose exec para rodar comandos dentro dos containers.
 
-MIT License. Veja [LICENSE](LICENSE) para mais detalhes.
+Se recriar o container do PostgreSQL, as tabelas precisarão ser migradas novamente.
+
+Licença
+MIT License. Veja LICENSE para mais detalhes.
