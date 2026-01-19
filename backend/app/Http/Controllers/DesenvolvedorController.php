@@ -9,7 +9,7 @@ class DesenvolvedorController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 2);
+        $perPage = $request->query('per_page', 5);
 
         $paginated = Desenvolvedor::with('nivel')
             ->orderBy('id')

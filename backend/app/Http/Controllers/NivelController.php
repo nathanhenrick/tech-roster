@@ -9,7 +9,7 @@ class NivelController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
+        $perPage = $request->query('per_page', 5);
 
         $paginated = Nivel::orderBy('id')->paginate($perPage);
 

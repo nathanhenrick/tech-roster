@@ -77,6 +77,10 @@ export default function DevelopersPage() {
       setDevelopers(devs)
       setLevels(lvls.map(l => ({ id: l.id, nome: l.nivel })))
       setTotalPages(meta.last_page || 1)
+
+      if (lvls.length === 0) {
+        toast.error('Nenhum nível cadastrado. Cadastre um nível primeiro.')
+      }
     } catch (error) {
       console.error(error)
       toast.error('Erro ao buscar dados')
@@ -141,8 +145,8 @@ export default function DevelopersPage() {
       text: `Deseja excluir ${dev.nome}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Não, cancelar',
       customClass: {
         confirmButton: styles.confirmAlertButton,
         cancelButton: styles.confirmAlertButton
@@ -175,6 +179,7 @@ export default function DevelopersPage() {
 
         <button
           className={styles.addButton}
+          data-testid="developer-add"
           onClick={() => openModal('create')}
         >
           <BsPlus />
@@ -189,6 +194,7 @@ export default function DevelopersPage() {
             type="text"
             placeholder="Buscar por nome, hobby ou nascimento..."
             className={styles.searchInput}
+            data-testid="developer-search"
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
@@ -223,28 +229,41 @@ export default function DevelopersPage() {
                 </tr>
               ) : (
                 displayItems.map(dev => (
-                  <tr key={dev.id}>
+                  <tr key={dev.id} data-testid={`developer-row-${dev.id}`}>
                     <td>{dev.nome}</td>
                     <td>{levels.find(l => l.id === dev.nivel_id)?.nome || '-'}</td>
-                    <td>{dev.sexo}</td>
-                    <td>{dev.data_nascimento}</td>
+                    <td>{{
+                      M: 'Masculino',
+                      F: 'Feminino',
+                      O: 'Outro'
+                    }[dev.sexo] || '-'}</td>
+                    <td>
+                      {dev.data_nascimento
+                        ? dev.data_nascimento.split('-').reverse().join('/')
+                        : '-'}
+                    </td>
                     <td>{dev.hobby}</td>
                     <td style={{ textAlign: 'right' }}>
                       <div className={styles.actions}>
                         <button
                           className={styles.actionButton}
+                          data-testid="developer-view"
                           onClick={() => openModal('view', dev)}
                         >
                           <BsEye />
                         </button>
+
                         <button
                           className={styles.actionButton}
+                          data-testid="developer-edit"
                           onClick={() => openModal('edit', dev)}
                         >
                           <BsPencilSquare />
                         </button>
+
                         <button
                           className={styles.actionButton}
+                          data-testid="developer-delete"
                           onClick={() => handleDelete(dev)}
                         >
                           <BsTrash />
@@ -252,6 +271,7 @@ export default function DevelopersPage() {
                       </div>
                     </td>
                   </tr>
+
                 ))
               )
             }
@@ -296,6 +316,8 @@ export default function DevelopersPage() {
         }
         onClose={() => setIsModalOpen(false)}
         onSave={modalMode === 'view' ? undefined : handleSave}
+        saveButtonTestId="developer-save"
+        cancelButtonTestId="developer-cancel"
       >
         <div className={styles.modalForm}>
           <div>
@@ -303,6 +325,7 @@ export default function DevelopersPage() {
             <input
               disabled={modalMode === 'view'}
               value={payload.nome}
+              data-testid="developer-name"
               onChange={e => setPayload(prev => ({ ...prev, nome: e.target.value }))}
             />
           </div>
@@ -312,6 +335,7 @@ export default function DevelopersPage() {
             <select
               disabled={modalMode === 'view'}
               value={payload.nivel_id}
+              data-testid="developer-level"
               onChange={e =>
                 setPayload(prev => ({ ...prev, nivel_id: Number(e.target.value) }))
               }
@@ -327,6 +351,7 @@ export default function DevelopersPage() {
             <label>Sexo</label>
             <select
               disabled={modalMode === 'view'}
+              data-testid="developer-gender"
               value={payload.sexo}
               onChange={e =>
                 setPayload(prev => ({ ...prev, sexo: e.target.value }))
@@ -344,6 +369,7 @@ export default function DevelopersPage() {
             <input
               type="date"
               disabled={modalMode === 'view'}
+              data-testid="developer-birth"
               value={payload.data_nascimento}
               onChange={e =>
                 setPayload(prev => ({ ...prev, data_nascimento: e.target.value }))
@@ -355,6 +381,7 @@ export default function DevelopersPage() {
             <label>Hobby</label>
             <input
               disabled={modalMode === 'view'}
+              data-testid="developer-hobby"
               value={payload.hobby}
               onChange={e =>
                 setPayload(prev => ({ ...prev, hobby: e.target.value }))

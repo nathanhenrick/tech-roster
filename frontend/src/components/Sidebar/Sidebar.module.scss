@@ -51,21 +51,20 @@
       padding: 10px 12px;
       border: none;
       background: transparent;
-      color: #6b7280;
-      font-size: 14px;
+      color: $black-color;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .navItem:hover {
-      background-color: #f3f4f6;
+      background-color: $light-gray-color;
+      color: $black-color;
     }
 
     .navItemActive {
-      background-color: #eff6ff;
-      color: #3b82f6;
-      font-weight: 500;
+      background-color: $secondary-color;
+      color: $white-color;
     }
   }
 }

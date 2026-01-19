@@ -1,28 +1,17 @@
 import type React from "react";
 import styles from "./Button.module.scss";
 
-type ButtonProps = {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   label?: React.ReactNode;
-  onClick?: () => void;
-  type?: "button" | "submit";
-  disabled?: boolean;
-}
+};
 
-export function Button({
-  label,
-  onClick,
-  type,
-  disabled
-}: ButtonProps) {
-
+export function Button({ label, ...props }: ButtonProps) {
   return (
     <button
       className={styles.primary}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
+      {...props}
     >
       {label}
     </button>
-  )
+  );
 }

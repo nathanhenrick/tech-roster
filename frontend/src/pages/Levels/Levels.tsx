@@ -126,8 +126,8 @@ export default function LevelsPage() {
       text: `Deseja excluir ${level.nivel}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Não, cancelar',
       customClass: {
         confirmButton: styles.confirmAlertButton,
         cancelButton: styles.confirmAlertButton
@@ -163,9 +163,9 @@ export default function LevelsPage() {
             Gerencie e categorize os níveis de senioridade técnica da organização.
           </p>
         </div>
-        <button className={styles.addButton} onClick={() => openModal('create')}>
+        <button data-testid="level-add" className={styles.addButton} onClick={() => openModal('create')}>
           <BsPlus />
-          Adicionar Novo Nível
+          Adicionar Nível
         </button>
 
         <ModalTemplate
@@ -173,13 +173,17 @@ export default function LevelsPage() {
           title={modalMode === 'edit' ? 'Editar Nível' : 'Adicionar Nível'}
           onClose={() => setIsModalOpen(false)}
           onSave={handleSave}
+          saveButtonTestId="level-save"
+          cancelButtonTestId="level-cancel"
         >
+
           <div className={styles.modalForm}>
             <div>
               <label>Nome do Nível</label>
               <input
                 type="text"
                 value={payload.nivel}
+                data-testid="level-name"
                 onChange={e => setPayload({ nivel: e.target.value })}
               />
             </div>
@@ -224,19 +228,21 @@ export default function LevelsPage() {
               </tr>
             ) : (
               displayItems.map((nivel: Level) => (
-                <tr key={nivel.id}>
+                <tr key={nivel.id} data-testid={`level-row-${nivel.id}`}>
                   <td>{nivel.nivel}</td>
                   <td>{nivel.count} desenvolvedores</td>
                   <td style={{ textAlign: 'right' }}>
                     <div className={styles.actions}>
                       <button
                         className={styles.actionButton}
+                        data-testid="level-edit"
                         onClick={() => openModal('edit', nivel)}
                       >
                         <BsPencilSquare />
                       </button>
                       <button
                         className={styles.actionButton}
+                        data-testid="level-delete"
                         onClick={() => handleDelete(nivel)}
                       >
                         <BsTrash />
@@ -250,7 +256,7 @@ export default function LevelsPage() {
         </table>
       </div>
 
-      {!query && totalPages > 1 && (
+      {!query && totalPages > 0 && (
         <div className={styles.pagination}>
           <button
             disabled={currentPage === 1}

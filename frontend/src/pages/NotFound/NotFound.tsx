@@ -13,9 +13,14 @@ export default function NotFound() {
           A rota que você tentou acessar não existe ou foi removida.
         </p>
 
-        <Link to="" onClick={() => navite(-1)} className={styles.button}>
-          Voltar
-        </Link>
+        <div className={styles.btnContainer}>
+          <Link to="" onClick={() => navite(-1)} className={styles.button}>
+            Página anterior
+          </Link>
+          <Link to="" onClick={() => navite('/admin/cadastrar')} className={styles.button}>
+            Início
+          </Link>
+        </div>
       </div>
     </div>
   )
