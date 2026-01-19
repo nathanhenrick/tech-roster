@@ -65,12 +65,11 @@ docker-compose up -d --build
 
 Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
-4. Rodar migrations e seeders dentro do container backend:
+4. Rodar migrations dentro do container backend:
 
 ```bash
 docker-compose exec backend php artisan migrate
-# Opcional: se houver seeders
-docker-compose exec backend php artisan db:seed
+
 ```
 
 5. Instalar dependências e rodar frontend dentro do container:
