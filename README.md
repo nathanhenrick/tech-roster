@@ -42,7 +42,7 @@ cd tech-roster
 
 ```bash
 cd backend
-cp .env.example .env       # Copiar o .env antes de instalar
+copy .env.example .env       # Copiar o .env antes de instalar
 composer install              # Instalar dependências
 php artisan serve             # Rodar backend
 ```
