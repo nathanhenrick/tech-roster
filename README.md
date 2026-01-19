@@ -33,11 +33,6 @@ tech-roster/
 git clone https://github.com/nathanhenrick/tech-roster.git
 cd tech-roster
 ```
-Suba os containers do Docker:
-```bash
-docker-compose up -d --build
-```
-Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
 Criar o .env do backend:
 ```bash
@@ -69,6 +64,13 @@ Instalar dependências do frontend (se necessário):
 docker-compose exec frontend npm install
 docker-compose exec frontend npm run dev
 ```
+
+Suba os containers do Docker:
+```bash
+docker-compose up -d --build
+```
+Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
+
 ## Acesso
 Backend: http://localhost:8000
 
