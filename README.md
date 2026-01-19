@@ -36,8 +36,8 @@ cd tech-roster
 Suba os containers do Docker:
 ```bash
 docker-compose up -d --build
-Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 ```
+Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
 Criar o .env do backend:
 ```bash
