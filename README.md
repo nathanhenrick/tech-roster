@@ -47,7 +47,7 @@ copy .env.example .env       # Copiar o .env antes de instalar
 
 Depois de criar o .env, ajuste os campos do banco de dados para que correspondam ao seu container Docker ou ambiente local. Por exemplo:
 
-DB_CONNECTION=pgsql
+DB_CONNECTION=pgsql\n
 DB_HOST=db
 DB_PORT=5432
 DB_DATABASE=techrosterdb
