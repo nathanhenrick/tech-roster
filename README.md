@@ -42,8 +42,6 @@ cd backend
 copy .env.example .env  # Windows
 # ou
 cp .env.example .env       # Linux/Mac
-
-code .
 ```
 
 3. Ajuste os campos do banco de dados para usar o container do PostgreSQL:
@@ -59,29 +57,25 @@ DB_PASSWORD=rz6nVN541@&O
 
 Os demais campos podem permanecer como estão no `.env.example`.
 
-4. Suba os containers do Docker:
+4. Instalar dependências do backend e gerar key dentro do container:
 
 ```bash
-cd ..  # voltar para a raiz
-docker-compose up -d --build
+docker-compose run --rm backend bash
+composer install
+php artisan key:generate
+php artisan migrate
+exit
+```
+
+5. Suba os containers do Docker:
+
+```bash
+docker-compose up -d
 ```
 
 Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
-5. Instalar dependências do backend dentro do container e gerar a key:
-
-```bash
-docker-compose exec backend composer install
-docker-compose exec backend php artisan key:generate
-```
-
-6. Rodar migrations dentro do container backend:
-
-```bash
-docker-compose exec backend php artisan migrate
-```
-
-7. Instalar dependências e rodar frontend dentro do container:
+6. Instalar dependências e rodar frontend dentro do container:
 
 ```bash
 docker-compose exec frontend npm install
