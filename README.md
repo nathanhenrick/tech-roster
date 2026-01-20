@@ -26,7 +26,7 @@ tech-roster/
 * PHP >= 8.1
 * Composer
 
-## Instalação e execução
+## Instalação e execução do zero
 
 1. Clone o repositório:
 
@@ -44,7 +44,7 @@ copy .env.example .env  # Windows
 cp .env.example .env       # Linux/Mac
 ```
 
-Ajuste os campos do banco de dados para usar o container do PostgreSQL:
+3. Ajuste os campos do banco de dados para usar o container do PostgreSQL:
 
 ```dotenv
 DB_CONNECTION=pgsql
@@ -57,27 +57,29 @@ DB_PASSWORD=rz6nVN541@&O
 
 Os demais campos podem permanecer como estão no `.env.example`.
 
-3. Suba os containers do Docker:
+4. Suba os containers do Docker:
 
-1. Saia da pasta /backend
 ```bash
-cd ..
-```
-2. Execute o comando
-```bash
+cd ..  # voltar para a raiz
 docker-compose up -d --build
 ```
 
 Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
-4. Rodar migrations dentro do container backend:
+5. Instalar dependências do backend dentro do container e gerar a key:
+
+```bash
+docker-compose exec backend composer install
+docker-compose exec backend php artisan key:generate
+```
+
+6. Rodar migrations dentro do container backend:
 
 ```bash
 docker-compose exec backend php artisan migrate
-
 ```
 
-5. Instalar dependências e rodar frontend dentro do container:
+7. Instalar dependências e rodar frontend dentro do container:
 
 ```bash
 docker-compose exec frontend npm install
