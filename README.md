@@ -42,6 +42,8 @@ cd backend
 copy .env.example .env  # Windows
 # ou
 cp .env.example .env       # Linux/Mac
+
+code .
 ```
 
 3. Ajuste os campos do banco de dados para usar o container do PostgreSQL:
