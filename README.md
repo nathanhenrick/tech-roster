@@ -93,8 +93,7 @@ Todos os serviços estão rodando dentro de containers Docker, não é necessár
 
 ## Observações
 
-* Sempre use `docker-compose exec` para rodar comandos dentro dos containers.
-* Se recriar o container do PostgreSQL, as tabelas precisarão ser migradas novamente.
+* Atente-se se não há outros projetos rodando nas mesmas portas.
 
 ## Licença
 
