@@ -1,6 +1,6 @@
 # Tech Roster
 
-Sistema de gerenciamento de desenvolvedores e seus níveis de habilidade, com autenticação de usuários, registro e login. Frontend em Vue/TypeScript e backend em Laravel/Blade.
+Sistema de gerenciamento de desenvolvedores e seus níveis de habilidade, com autenticação de usuários, registro e login. Frontend em React/TypeScript e backend em Laravel.
 
 ## Tecnologias
 
