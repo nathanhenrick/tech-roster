@@ -59,11 +59,6 @@ DB_PASSWORD=rz6nVN541@&O
 
 Os demais campos podem permanecer como estão no `.env.example`.
 
-4. Voltar para a pasta root
-```bash
-code ..
-```
-
 5. Instalar dependências do backend e gerar key dentro do container:
 
 ```bash
