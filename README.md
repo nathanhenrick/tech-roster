@@ -59,7 +59,12 @@ DB_PASSWORD=rz6nVN541@&O
 
 Os demais campos podem permanecer como estão no `.env.example`.
 
-4. Instalar dependências do backend e gerar key dentro do container:
+4. Voltar para a pasta root
+```bash
+code ..
+```
+
+5. Instalar dependências do backend e gerar key dentro do container:
 
 ```bash
 docker-compose run --rm backend bash
@@ -69,7 +74,7 @@ php artisan migrate
 exit
 ```
 
-5. Suba os containers do Docker:
+6. Suba os containers do Docker:
 
 ```bash
 docker-compose up -d
