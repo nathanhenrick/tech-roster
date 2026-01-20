@@ -77,13 +77,6 @@ docker-compose up -d
 
 Isso vai construir e iniciar os containers do backend, frontend e PostgreSQL.
 
-6. Instalar dependências e rodar frontend dentro do container:
-
-```bash
-docker-compose exec frontend npm install
-docker-compose exec frontend npm run dev
-```
-
 ## Acesso
 
 * Backend: [http://localhost:8000](http://localhost:8000)
